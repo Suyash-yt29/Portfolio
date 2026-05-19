@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+:root {
+  --background: 240 10% 4%; /* Deep cyber-noir background */
+  --foreground: 0 0% 98%;
+  
+  /* Theme 1 - Electric Blue + Purple Default */
+  --primary-glow: conic-gradient(from 180deg at 50% 50%, #2a8af6 0deg, #a853ba 180deg, #e92a67 360deg);
+  --secondary-glow: radial-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+}
+
+/* We use pure CSS here for the custom scrollbar, bypassing Tailwind entirely */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
