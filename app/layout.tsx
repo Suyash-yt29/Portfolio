@@ -8,8 +8,8 @@ import SmoothScroll from "../components/animations/SmoothScroll";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Mayank Vispute | Software Engineer",
-  description: "Innovative Computer Engineering undergraduate specializing in full-stack development and AI-driven systems.",
+  title: "Suyash Vishwakarma | Intermediate Computer Engineer (Vibe Coder) | Full stack Developer | AI Enthusiast",
+  description: "Innovative Computer Engineering Student specializing in full-stack development and AI-drivennt systems.",
 };
 
 export default function RootLayout({

@@ -95,12 +95,16 @@ export default function Contact() {
 
                 <div className="flex flex-col gap-8 mt-2">
                   <div className="group/link cursor-pointer">
-                    <p className="text-xs font-mono text-gray-400 tracking-widest uppercase mb-2">Direct Line</p>
-                    <p className="text-xl md:text-2xl text-white font-medium transition-all duration-300 group-hover/link:text-[#d4af37] group-hover/link:translate-x-2 inline-block">+91 9511229694</p>
+                    <p className="text-xs font-mono text-gray-400 tracking-widest uppercase mb-2">Instagram</p>
+                    <p className="text-xl md:text-2xl text-white font-medium transition-all duration-300 group-hover/link:text-[#d4af37] group-hover/link:translate-x-2 inline-block">@Illustrious.29</p>
                   </div>
                   <div className="group/link cursor-pointer">
                     <p className="text-xs font-mono text-gray-400 tracking-widest uppercase mb-2">Secure Comm-Link</p>
-                    <p className="text-xl md:text-2xl text-white font-medium transition-all duration-300 group-hover/link:text-[#d4af37] group-hover/link:translate-x-2 inline-block">visputemayank007@gmail.com</p>
+                    <a href="mailto:suyash2v9@gmail.com" className="text-xl md:text-2xl text-white font-medium transition-all duration-300 group-hover/link:text-[#d4af37] group-hover/link:translate-x-2 inline-block">suyash2v9@gmail.com</a>
+                  </div>
+                  <div className="group/link cursor-pointer">
+                    <p className="text-xs font-mono text-gray-400 tracking-widest uppercase mb-2">Base Location</p>
+                    <p className="text-xl md:text-2xl text-white font-medium transition-all duration-300 group-hover/link:text-[#d4af37] group-hover/link:translate-x-2 inline-block">Kanpur, Uttar Pradesh, India</p>
                   </div>
                 </div>
               </div>
@@ -126,23 +130,14 @@ export default function Contact() {
                 {/* Social Icons Container */}
                 <div className="flex gap-4 w-full sm:w-auto justify-start lg:justify-end">
                   {/* GitHub */}
-                  <a href="https://github.com/mayankvispute7" target="_blank" rel="noreferrer" className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:border-[#d4af37] hover:text-[#d4af37] hover:bg-[#d4af37]/10 hover:shadow-[0_10px_20px_rgba(212,175,55,0.2)]">
+                  <a href="https://github.com/Suyash29-source" target="_blank" rel="noreferrer" className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:border-[#d4af37] hover:text-[#d4af37] hover:bg-[#d4af37]/10 hover:shadow-[0_10px_20px_rgba(212,175,55,0.2)]">
                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 9 18v4"></path>
                     </svg>
                   </a>
                   
-                  {/* LinkedIn */}
-                  <a href="https://www.linkedin.com/in/mayank-vispute-a28641251/" target="_blank" rel="noreferrer" className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:border-[#d4af37] hover:text-[#d4af37] hover:bg-[#d4af37]/10 hover:shadow-[0_10px_20px_rgba(212,175,55,0.2)]">
-                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                      <rect x="2" y="9" width="4" height="12"></rect>
-                      <circle cx="4" cy="4" r="2"></circle>
-                    </svg>
-                  </a>
-                  
                   {/* Instagram */}
-                  <a href="#" target="_blank" rel="noreferrer" className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:border-[#d4af37] hover:text-[#d4af37] hover:bg-[#d4af37]/10 hover:shadow-[0_10px_20px_rgba(212,175,55,0.2)]">
+                  <a href="https://instagram.com/illustrious.29" target="_blank" rel="noreferrer" className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-2 hover:border-[#d4af37] hover:text-[#d4af37] hover:bg-[#d4af37]/10 hover:shadow-[0_10px_20px_rgba(212,175,55,0.2)]">
                     <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
                       <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                       <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
@@ -160,7 +155,7 @@ export default function Contact() {
       
       {/* Footer */}
       <div className="absolute bottom-6 left-0 w-full text-center text-[10px] md:text-xs text-gray-600 z-10 pointer-events-none font-mono tracking-widest">
-        <p>DESIGNED & BUILT BY MAYANK VISPUTE © {new Date().getFullYear()}</p>
+        <p>DESIGNED & BUILT BY SUYASH VISHWAKARMA © {new Date().getFullYear()}</p>
       </div>
     </section>
   );

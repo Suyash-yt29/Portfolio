@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Caveat, Cormorant_Garamond } from "next/font/google";
 
@@ -12,14 +12,14 @@ const premiumFont = Cormorant_Garamond({
   style: ["normal", "italic"] 
 });
 
-// Categories
+// Categories (mapped to the user's requested skill groups)
 const categories = [
-  { id: "ai", name: "AI & Machine Learning", sunText: "AI / ML", sunColor: "rgba(168, 85, 247, 0.6)", icon: "M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1.27a1.73 1.73 0 0 1-1.27 3h-1v1a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-1H3a1.73 1.73 0 0 1-1.27-3H3a7 7 0 0 1 7-7h1V5.73A2 2 0 0 1 12 2z" },
-  { id: "frontend", name: "Frontend & UI", sunText: "UI / UX", sunColor: "rgba(34, 211, 238, 0.6)", icon: "M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6zm4 5v2h8v-2H8z" },
-  { id: "backend", name: "Backend & Database", sunText: "Backend", sunColor: "rgba(34, 197, 94, 0.6)", icon: "M12 2C6.48 2 2 3.79 2 6v12c0 2.21 4.48 4 10 4s10-1.79 10-4V6c0-2.21-4.48-4-10-4zm0 6c-4.42 0-8-1.34-8-3s3.58-3 8-3 8 1.34 8 3-3.58 3-8 3zm0 6c-4.42 0-8-1.34-8-3v.35c0 1.66 3.58 3 8 3s8-1.34 8-3V11c0 1.66-3.58 3-8 3z" },
-  { id: "languages", name: "Languages & Core", sunText: "Core", sunColor: "rgba(234, 179, 8, 0.6)", icon: "M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z" },
-  { id: "devops", name: "DevOps & Tools", sunText: "DevOps", sunColor: "rgba(249, 115, 22, 0.6)", icon: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" },
-  { id: "mobile", name: "Mobile App Dev", sunText: "Mobile", sunColor: "rgba(59, 130, 246, 0.6)", icon: "M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z" }
+  { id: "programming", name: "Programming", sunText: "Core", sunColor: "rgba(234,179,8,0.6)", icon: "M12 2L2 7l10 5 10-5-10-5z" },
+  { id: "frontend", name: "Frontend", sunText: "UI", sunColor: "rgba(34,211,238,0.6)", icon: "M4 6h16v12H4z" },
+  { id: "backend", name: "Backend", sunText: "Server", sunColor: "rgba(34,197,94,0.6)", icon: "M12 2v6M6 12v8h12v-8" },
+  { id: "ai_tools", name: "AI & Tools", sunText: "AI", sunColor: "rgba(168,85,247,0.6)", icon: "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z" },
+  { id: "core_strengths", name: "Core Strengths", sunText: "Strengths", sunColor: "rgba(249,115,22,0.6)", icon: "M12 2l4 10-4-2-4 2z" },
+  { id: "learning", name: "Currently Learning", sunText: "Now", sunColor: "rgba(59,130,246,0.6)", icon: "M12 2l6 6-6-2-6 2z" }
 ];
 
 const orbitConfigs = [
@@ -32,67 +32,114 @@ const orbitConfigs = [
   { size: "w-[360px] h-[360px] md:w-[520px] md:h-[520px]", duration: 32 }, 
 ];
 
-const allSkills = [
-  // --- AI & Machine Learning ---
-  { id: "gemini", categoryId: "ai", name: "Gemini API", percent: 95, color: "from-blue-400 to-purple-500", glowColor: "rgba(139, 92, 246, 1)", angle: 0, image: "/skills/gemini.png" },
-  { id: "rag", categoryId: "ai", name: "RAG & LangChain", percent: 95, color: "from-amber-400 to-orange-500", glowColor: "rgba(245, 158, 11, 1)", angle: 120, image: "/skills/rag.png", invertLogo: true },
-  { id: "chatbot", categoryId: "ai", name: "Chatbot Dev", percent: 95, color: "from-yellow-300 to-amber-500", glowColor: "rgba(234, 179, 8, 1)", angle: 240, image: "/skills/chatbot.png" },
-  { id: "openai", categoryId: "ai", name: "OpenAI API", percent: 90, color: "from-green-400 to-emerald-600", glowColor: "rgba(16, 185, 129, 1)", angle: 60, image: "/skills/openai.png" },
-  { id: "mlops", categoryId: "ai", name: "MLOps", percent: 85, color: "from-pink-400 to-rose-600", glowColor: "rgba(244, 63, 94, 1)", angle: 180, image: "/skills/mlops.png" },
-  { id: "xgboost", categoryId: "ai", name: "XGBoost", percent: 85, color: "from-cyan-400 to-blue-500", glowColor: "rgba(6, 182, 212, 1)", angle: 300, image: "/skills/xgboost.png" },
-  { id: "nlp", categoryId: "ai", name: "NLP", percent: 90, color: "from-teal-300 to-green-500", glowColor: "rgba(20, 184, 166, 1)", angle: 90, image: "/skills/nlp.png" },
+type Skill = {
+  id: string;
+  categoryId: string;
+  name: string;
+  percent: number;
+  color: string;
+  glowColor: string;
+  angle: number;
+  image: string;
+  invertLogo?: boolean;
+};
 
-  // --- Frontend & UI ---
-  { id: "next", categoryId: "frontend", name: "Next.js 14", percent: 95, color: "from-white to-gray-400", glowColor: "rgba(255, 255, 255, 1)", angle: 0, image: "/skills/next.png", invertLogo: true }, 
-  { id: "tailwind", categoryId: "frontend", name: "Tailwind CSS", percent: 95, color: "from-teal-300 to-cyan-500", glowColor: "rgba(20, 184, 166, 1)", angle: 180, image: "/skills/tailwind.png" },
-  { id: "react", categoryId: "frontend", name: "React.js", percent: 90, color: "from-cyan-400 to-blue-500", glowColor: "rgba(6, 182, 212, 1)", angle: 90, image: "/skills/react.png" },
-  { id: "htmlcss", categoryId: "frontend", name: "HTML / CSS", percent: 90, color: "from-orange-400 to-red-500", glowColor: "rgba(249, 115, 22, 1)", angle: 270, image: "/skills/html.png" },
-  { id: "streamlit", categoryId: "frontend", name: "Streamlit", percent: 85, color: "from-red-400 to-rose-600", glowColor: "rgba(225, 29, 72, 1)", angle: 45, image: "/skills/streamlit.png" },
-  { id: "figma", categoryId: "frontend", name: "Figma (UI/UX)", percent: 80, color: "from-purple-400 to-pink-500", glowColor: "rgba(168, 85, 247, 1)", angle: 225, image: "/skills/figma.png" },
+const allSkills: Skill[] = [
+  // Programming
+  { id: "javascript", categoryId: "programming", name: "JavaScript", percent: 92, color: "from-yellow-300 to-yellow-500", glowColor: "rgba(250,204,21,1)", angle: 0, image: "/skills/javascript.png" },
+  { id: "python", categoryId: "programming", name: "Python", percent: 90, color: "from-yellow-400 to-blue-500", glowColor: "rgba(234,179,8,1)", angle: 60, image: "/skills/python.png" },
+  { id: "html", categoryId: "programming", name: "HTML", percent: 88, color: "from-orange-400 to-red-500", glowColor: "rgba(249,115,22,1)", angle: 120, image: "/skills/html.png" },
+  { id: "css", categoryId: "programming", name: "CSS", percent: 86, color: "from-blue-400 to-indigo-500", glowColor: "rgba(59,130,246,1)", angle: 180, image: "/skills/css.png" },
+  { id: "typescript", categoryId: "programming", name: "TypeScript", percent: 88, color: "from-sky-400 to-blue-600", glowColor: "rgba(56,189,248,1)", angle: 240, image: "/skills/typescript.png" },
 
-  // --- Backend & Database ---
-  { id: "supabase", categoryId: "backend", name: "Supabase", percent: 90, color: "from-emerald-400 to-green-600", glowColor: "rgba(16, 185, 129, 1)", angle: 0, image: "/skills/supabase.png" },
-  { id: "fastapi", categoryId: "backend", name: "FastAPI", percent: 90, color: "from-teal-400 to-cyan-600", glowColor: "rgba(45, 212, 191, 1)", angle: 180, image: "/skills/fastapi.png" },
-  { id: "node", categoryId: "backend", name: "Node.js", percent: 85, color: "from-green-400 to-emerald-600", glowColor: "rgba(34, 197, 94, 1)", angle: 90, image: "/skills/node.png", invertLogo: true }, 
-  { id: "express", categoryId: "backend", name: "Express.js", percent: 85, color: "from-gray-300 to-gray-500", glowColor: "rgba(156, 163, 175, 1)", angle: 270, image: "/skills/express.png", invertLogo: true }, 
-  { id: "websockets", categoryId: "backend", name: "WebSockets", percent: 85, color: "from-yellow-400 to-orange-500", glowColor: "rgba(234, 179, 8, 1)", angle: 45, image: "/skills/websockets.png" },
-  { id: "mysql", categoryId: "backend", name: "MySQL", percent: 85, color: "from-blue-400 to-indigo-600", glowColor: "rgba(59, 130, 246, 1)", angle: 225, image: "/skills/mysql.png" },
-  { id: "django", categoryId: "backend", name: "Django", percent: 80, color: "from-green-600 to-emerald-800", glowColor: "rgba(4, 120, 87, 1)", angle: 135, image: "/skills/django.png" },
+  // Frontend
+  { id: "react", categoryId: "frontend", name: "React", percent: 90, color: "from-cyan-400 to-blue-500", glowColor: "rgba(6,182,212,1)", angle: 30, image: "/skills/react.png" },
+  { id: "nextjs", categoryId: "frontend", name: "Next.js", percent: 90, color: "from-white to-gray-400", glowColor: "rgba(255,255,255,1)", angle: 150, image: "/skills/next.png" },
+  { id: "tailwind", categoryId: "frontend", name: "Tailwind CSS", percent: 89, color: "from-teal-300 to-cyan-500", glowColor: "rgba(20,184,166,1)", angle: 270, image: "/skills/tailwind.png" },
+  { id: "vercel", categoryId: "frontend", name: "Vercel", percent: 84, color: "from-gray-200 to-slate-400", glowColor: "rgba(226,232,240,1)", angle: 30, image: "/skills/vercel.png" },
+  { id: "seo", categoryId: "frontend", name: "SEO", percent: 79, color: "from-emerald-300 to-green-500", glowColor: "rgba(52,211,153,1)", angle: 210, image: "/skills/seo.png" },
 
-  // --- Languages & Core ---
-  { id: "python", categoryId: "languages", name: "Python", percent: 95, color: "from-yellow-400 to-blue-500", glowColor: "rgba(234, 179, 8, 1)", angle: 0, image: "/skills/python.png" },
-  { id: "javascript", categoryId: "languages", name: "JavaScript", percent: 95, color: "from-yellow-300 to-yellow-500", glowColor: "rgba(250, 204, 21, 1)", angle: 180, image: "/skills/javascript.png" },
-  { id: "typescript", categoryId: "languages", name: "TypeScript", percent: 90, color: "from-blue-400 to-blue-600", glowColor: "rgba(59, 130, 246, 1)", angle: 90, image: "/skills/typescript.png" },
-  { id: "java", categoryId: "languages", name: "Java", percent: 80, color: "from-red-400 to-orange-500", glowColor: "rgba(239, 68, 68, 1)", angle: 270, image: "/skills/java.png" },
-  { id: "cpp", categoryId: "languages", name: "C++", percent: 75, color: "from-blue-500 to-indigo-700", glowColor: "rgba(37, 99, 235, 1)", angle: 45, image: "/skills/cpp.png" },
+  // Backend
+  { id: "flask", categoryId: "backend", name: "Flask", percent: 85, color: "from-green-400 to-emerald-600", glowColor: "rgba(34,197,94,1)", angle: 0, image: "/skills/flask.png" },
+  { id: "nodejs", categoryId: "programming", name: "Node.js", percent: 88, color: "from-green-400 to-emerald-600", glowColor: "rgba(34,197,94,1)", angle: 90, image: "/skills/node.png" },
+  { id: "socketio", categoryId: "backend", name: "Socket.IO", percent: 84, color: "from-yellow-400 to-orange-500", glowColor: "rgba(234,179,8,1)", angle: 180, image: "/skills/websockets.png" },
+  { id: "express", categoryId: "backend", name: "Express", percent: 86, color: "from-emerald-300 to-green-500", glowColor: "rgba(74,222,128,1)", angle: 300, image: "/skills/express.png" },
+  { id: "docker", categoryId: "backend", name: "Docker", percent: 83, color: "from-sky-300 to-cyan-500", glowColor: "rgba(103,232,249,1)", angle: 30, image: "/skills/docker.png" },
+  { id: "mysql", categoryId: "backend", name: "MySQL", percent: 82, color: "from-blue-400 to-indigo-500", glowColor: "rgba(96,165,250,1)", angle: 150, image: "/skills/mysql.png" },
+  { id: "fastapi", categoryId: "backend", name: "FastAPI", percent: 80, color: "from-teal-300 to-emerald-500", glowColor: "rgba(94,234,212,1)", angle: 210, image: "/skills/fastapi.png" },
+  { id: "django", categoryId: "backend", name: "Django", percent: 79, color: "from-emerald-400 to-green-600", glowColor: "rgba(52,211,153,1)", angle: 270, image: "/skills/django.png" },
 
-  // --- DevOps & Tools ---
-  { id: "vercel", categoryId: "devops", name: "Vercel", percent: 95, color: "from-white to-gray-400", glowColor: "rgba(255, 255, 255, 1)", angle: 0, image: "/skills/vercel.png", invertLogo: true },
-  { id: "git", categoryId: "devops", name: "Git / GitHub", percent: 90, color: "from-orange-400 to-red-500", glowColor: "rgba(249, 115, 22, 1)", angle: 180, image: "/skills/git.png" },
-  { id: "docker", categoryId: "devops", name: "Docker", percent: 85, color: "from-blue-400 to-cyan-600", glowColor: "rgba(56, 189, 248, 1)", angle: 90, image: "/skills/docker.png" },
-  { id: "postman", categoryId: "devops", name: "Postman", percent: 85, color: "from-orange-300 to-orange-500", glowColor: "rgba(249, 115, 22, 1)", angle: 270, image: "/skills/postman.png" },
-  { id: "seo", categoryId: "devops", name: "SEO", percent: 80, color: "from-purple-400 to-indigo-500", glowColor: "rgba(168, 85, 247, 1)", angle: 45, image: "/skills/seo.png" },
-  { id: "cpanel", categoryId: "devops", name: "cPanel", percent: 80, color: "from-orange-500 to-red-600", glowColor: "rgba(239, 68, 68, 1)", angle: 225, image: "/skills/cpanel.png" },
+  // AI & Tools
+  { id: "huggingface", categoryId: "ai_tools", name: "Hugging Face", percent: 80, color: "from-purple-400 to-pink-500", glowColor: "rgba(168,85,247,1)", angle: 45, image: "/skills/huggingface.png" },
+  { id: "colab", categoryId: "ai_tools", name: "Google Colab", percent: 82, color: "from-blue-400 to-cyan-500", glowColor: "rgba(59,130,246,1)", angle: 135, image: "/skills/colab.png" },
+  { id: "git", categoryId: "ai_tools", name: "Git", percent: 90, color: "from-orange-400 to-red-500", glowColor: "rgba(249,115,22,1)", angle: 225, image: "/skills/git.png" },
+  { id: "json", categoryId: "ai_tools", name: "JSON", percent: 92, color: "from-gray-300 to-gray-500", glowColor: "rgba(156,163,175,1)", angle: 315, image: "/skills/json.png" },
+  { id: "ai_integration", categoryId: "ai_tools", name: "AI Integration", percent: 85, color: "from-amber-400 to-orange-500", glowColor: "rgba(245,158,11,1)", angle: 270, image: "/skills/ai.png" },
 
-  // --- Mobile App Dev ---
-  { id: "android", categoryId: "mobile", name: "Android Dev", percent: 85, color: "from-green-400 to-emerald-500", glowColor: "rgba(34, 197, 94, 1)", angle: 0, image: "/skills/android.png" },
-  { id: "kotlin", categoryId: "mobile", name: "Kotlin", percent: 80, color: "from-purple-400 to-orange-500", glowColor: "rgba(168, 85, 247, 1)", angle: 120, image: "/skills/kotlin.png" },
-  { id: "xml", categoryId: "mobile", name: "XML", percent: 85, color: "from-gray-300 to-gray-500", glowColor: "rgba(156, 163, 175, 1)", angle: 240, image: "/skills/xml.png" },
+  // Core Strengths (as lightweight items)
+  { id: "backend_strength", categoryId: "core_strengths", name: "Backend Development", percent: 92, color: "from-green-400 to-emerald-600", glowColor: "rgba(34,197,94,1)", angle: 0, image: "/skills/backend.png" },
+  { id: "product_thinking", categoryId: "core_strengths", name: "Product Thinking", percent: 88, color: "from-purple-400 to-pink-600", glowColor: "rgba(168,85,247,1)", angle: 60, image: "/skills/product.png" },
+  { id: "fast_learning", categoryId: "core_strengths", name: "Fast Learning", percent: 94, color: "from-blue-400 to-indigo-600", glowColor: "rgba(59,130,246,1)", angle: 120, image: "/skills/learning.png" },
+  { id: "uiux_thinking", categoryId: "core_strengths", name: "UI/UX Thinking", percent: 86, color: "from-teal-300 to-cyan-500", glowColor: "rgba(20,184,166,1)", angle: 180, image: "/skills/uiux.png" },
+  { id: "realtime", categoryId: "core_strengths", name: "Real-time Systems", percent: 85, color: "from-yellow-400 to-orange-500", glowColor: "rgba(234,179,8,1)", angle: 240, image: "/skills/realtime.png" },
+  { id: "problem_solving", categoryId: "core_strengths", name: "Problem Solving", percent: 95, color: "from-amber-400 to-orange-500", glowColor: "rgba(245,158,11,1)", angle: 300, image: "/skills/problem.png" },
+
+  // Currently Learning
+  { id: "advanced_backend", categoryId: "learning", name: "Advanced Backend Systems", percent: 60, color: "from-blue-400 to-indigo-600", glowColor: "rgba(59,130,246,1)", angle: 0, image: "/skills/advanced_backend.png" },
+  { id: "ai_product", categoryId: "learning", name: "AI Product Workflows", percent: 60, color: "from-purple-400 to-pink-500", glowColor: "rgba(168,85,247,1)", angle: 90, image: "/skills/ai_product.png" },
+  { id: "modern_web", categoryId: "learning", name: "Modern Web Architecture", percent: 65, color: "from-cyan-400 to-blue-500", glowColor: "rgba(6,182,212,1)", angle: 180, image: "/skills/modern_web.png" },
+  { id: "product_design", categoryId: "learning", name: "Product Design Thinking", percent: 62, color: "from-amber-400 to-orange-500", glowColor: "rgba(245,158,11,1)", angle: 270, image: "/skills/product_design.png" },
+  { id: "mlops", categoryId: "learning", name: "MLOps", percent: 62, color: "from-violet-400 to-fuchsia-500", glowColor: "rgba(192,132,252,1)", angle: 330, image: "/skills/mlops.png" },
+  { id: "nlp", categoryId: "learning", name: "NLP", percent: 64, color: "from-indigo-400 to-blue-500", glowColor: "rgba(99,102,241,1)", angle: 45, image: "/skills/nlp.png" },
+  { id: "rag", categoryId: "learning", name: "RAG", percent: 61, color: "from-cyan-400 to-sky-500", glowColor: "rgba(56,189,248,1)", angle: 135, image: "/skills/rag.png" },
 ];
+
+const skillDescriptions: Record<string, string> = {
+  javascript: "Builds interactive logic behind modern web applications and data-driven interfaces.",
+  python: "Powers scripting, automation, and AI prototyping workflows.",
+  html: "Structures semantic page layouts that support strong foundations and accessibility.",
+  css: "Shapes responsive layouts, visual polish, and interface feel.",
+  typescript: "Adds type safety to JavaScript projects and keeps large codebases maintainable.",
+  react: "Creates reusable UI components and dynamic state-driven experiences.",
+  nextjs: "Delivers production-ready React apps with routing, rendering, and performance in mind.",
+  tailwind: "Speeds up design iteration with utility-first styling and consistent UI systems.",
+  vercel: "Simplifies deployment pipelines and makes production hosting fast and reliable.",
+  seo: "Improves discoverability through metadata, structure, and content visibility strategies.",
+  flask: "Provides lightweight backend APIs with a flexible and Python-first approach.",
+  nodejs: "Powers event-driven server workflows and real-time application logic.",
+  socketio: "Enables low-latency bidirectional communication for live features.",
+  express: "Adds a fast routing layer and middleware-driven server architecture.",
+  docker: "Packages services consistently for deployment and local environment parity.",
+  mysql: "Stores relational data and supports structured query-based application workflows.",
+  fastapi: "Creates high-performance async APIs with modern Python tooling.",
+  django: "Offers a complete web framework for secure and maintainable backend systems.",
+  huggingface: "Connects projects to open-source models and pretrained transformers.",
+  colab: "Supports experimentation, training, and rapid prototyping in notebooks.",
+  git: "Tracks changes, enables collaboration, and keeps delivery workflows organized.",
+  json: "Structures data exchange between frontend, backend, and AI services.",
+  ai_integration: "Bridges product ideas with practical AI features and connected workflows.",
+  backend_strength: "Focuses on dependable systems architecture and scalable server-side design.",
+  product_thinking: "Turns user needs and product goals into practical engineering decisions.",
+  fast_learning: "Reflects the ability to absorb new frameworks, tools, and workflows quickly.",
+  uiux_thinking: "Combines visual clarity with usability and intent-driven interaction design.",
+  realtime: "Builds systems that react instantly and stay responsive under live traffic.",
+  problem_solving: "Strengthens debugging, architecture decisions, and tradeoff analysis.",
+  advanced_backend: "Explores deeper infrastructure design, scaling, and system resilience.",
+  ai_product: "Aligns AI capabilities with real product workflows and user value.",
+  modern_web: "Improves architecture and performance for contemporary web experiences.",
+  product_design: "Applies design thinking to shape product experiences and interfaces.",
+  mlops: "Brings deployment, monitoring, and model lifecycle management into production.",
+  nlp: "Works with text understanding, extraction, and language-driven interfaces.",
+  rag: "Combines retrieval with generation for grounded, context-aware AI experiences."
+};
 
 export default function Skills() {
   const [activeCategoryId, setActiveCategoryId] = useState(categories[0].id);
-  const [activeSkill, setActiveSkill] = useState(allSkills[0]);
-
-  useEffect(() => {
-    const skillsInCategory = allSkills.filter(s => s.categoryId === activeCategoryId);
-    if (skillsInCategory.length > 0) {
-      setActiveSkill(skillsInCategory[0]);
-    }
-  }, [activeCategoryId]);
+  const [selectedSkillId, setSelectedSkillId] = useState(allSkills[0].id);
 
   const activeCategory = categories.find(c => c.id === activeCategoryId) || categories[0];
-  const currentSkills = allSkills.filter(s => s.categoryId === activeCategoryId);
+  const currentSkills = useMemo(() => allSkills.filter(s => s.categoryId === activeCategoryId), [activeCategoryId]);
+  const activeSkill = currentSkills.find(skill => skill.id === selectedSkillId) ?? currentSkills[0];
 
   return (
     <section id="skills" className="relative flex w-full min-h-screen flex-col items-center justify-start py-24 z-10 overflow-hidden bg-transparent">
@@ -175,7 +222,7 @@ export default function Skills() {
                       >
                         {/* UNIFORM SIZING: Every planet is strictly h-12 w-12 (mobile) and h-14 w-14 (desktop) */}
                         <button
-                          onClick={() => setActiveSkill(skill)}
+                          onClick={() => setSelectedSkillId(skill.id)}
                           style={{ borderColor: activeSkill?.id === skill.id ? skill.glowColor : 'rgba(255,255,255,0.1)' }}
                           className={`group relative flex items-center justify-center rounded-full transition-all duration-300 border-2 bg-[#0a0a0a] h-12 w-12 md:h-14 md:w-14
                             ${activeSkill?.id === skill.id 
@@ -255,6 +302,12 @@ export default function Skills() {
                         <div className="absolute inset-0 bg-gradient-to-b from-white/40 to-transparent opacity-50 rounded-full"></div>
                       </motion.div>
                     </div>
+                  </div>
+
+                  <div className="mt-4 rounded-2xl border border-white/10 bg-white/5 px-4 py-3">
+                    <p className="text-sm leading-6 text-gray-200">
+                      {skillDescriptions[activeSkill.id] || "This capability helps shape the product experience and delivery flow."}
+                    </p>
                   </div>
 
                 </div>

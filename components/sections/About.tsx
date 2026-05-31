@@ -84,10 +84,10 @@ export default function About() {
             FIX: Changed to animate specific 'y' viewport heights so it NEVER disappears randomly 
           */}
           <motion.div
-            animate={{ y: ["100vh", "-200vh"] }} // Starts at the bottom of the screen, scrolls way past the top
+            animate={{ y: ["100vh", "-120vh"] }} // Starts at the bottom of the screen, scrolls way past the top
             transition={{
               repeat: Infinity,
-              duration: 40, // 40 seconds for a smooth, readable speed
+              duration: 60, // 60 seconds for a smooth, readable speed
               ease: "linear",
             }}
             // FIX: Made the text block 'absolute' so it ignores normal layout rules
@@ -98,17 +98,24 @@ export default function About() {
             <div className={`${premiumParagraphFont.className} space-y-12 md:space-y-16 text-3xl md:text-4xl lg:text-5xl leading-relaxed text-gray-300 tracking-wide drop-shadow-lg`}>
               
               <p>
-                I am an innovative Computer Engineering undergraduate at Savitribai Phule Pune University, operating at the intersection of <span className="font-bold text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]">full-stack development</span> and <span className="font-bold text-[#d4af37] drop-shadow-[0_0_10px_rgba(212,175,55,0.6)]">AI-driven systems</span>.
+                I’m Suyash Vishwakarma, a self-driven developer who began coding in 2024 with a strong interest in building products rather than simply writing code.
               </p>
               
               <p>
-                My passion lies in architecting scalable web platforms, multi-agent AI analytics tools, and real-time applications. Whether it is deploying containerized microservices or building fluid Next.js interfaces, I focus on delivering <span className="text-white font-bold drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]">production-ready, cinematic digital experiences.</span>
+                Coming from a science background with Physics, Chemistry, and Mathematics, I developed an analytical approach toward solving problems and understanding systems. Over time, my focus shifted toward technology, AI integration, backend systems, and product development.
               </p>
               
               <p>
-                Currently, I am heavily focused on <span className="text-[#d4af37] border-b-2 border-[#d4af37]/60 pb-1">Retrieval-Augmented Generation</span>, Generative AI APIs, and secure backend architectures to build systems that don't just function—they <span className="font-bold text-white">think</span>.
+                I enjoy exploring how people interact with digital products and how thoughtful design, intelligent features, and smooth user experiences can make technology feel natural.
               </p>
 
+              <p>
+                Currently, I’m focused on backend development, AI-powered applications, and building products that blend learning, communication, and social experiences.
+              </p>
+
+              <p>
+                I strongly believe good products are not built only with code—they are built through understanding users.
+              </p>
             </div>
             
             {/* Animated decorative line */}

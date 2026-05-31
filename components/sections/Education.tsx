@@ -8,59 +8,40 @@ const caveatFont = Caveat({ subsets: ["latin"], weight: ["400", "700"] });
 
 const educationStack = [
   {
-    id: "step-1",
-    level: "Phase 01: Foundation",
-    title: "Secondary School (X)",
-    institution: "Maharashtra State Board, Chalisgaon",
-    date: "Class of 2021",
-    highlight: "Score: 89.00%",
-    color: "from-teal-500 to-emerald-700",
-    borderColor: "border-teal-500/30",
-    accent: "text-teal-400",
-    topOffset: "top-[15vh]", // Stops highest on the screen
-    zIndex: "z-10",
-    icon: (
-      <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-      </svg>
-    ),
-  },
-  {
-    id: "step-2",
-    level: "Phase 02: Specialization",
-    title: "Diploma in Computer Science",
-    institution: "Zeal Polytechnic, Pune",
-    date: "2021 - 2024",
-    highlight: "Score: 86.33%",
-    color: "from-blue-500 to-cyan-700",
-    borderColor: "border-blue-500/40",
-    accent: "text-blue-400",
-    topOffset: "top-[25vh]", // Stops slightly lower, stacking over the first
-    zIndex: "z-20",
-    icon: (
-      <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="16 18 22 12 16 6"></polyline>
-        <polyline points="8 6 2 12 8 18"></polyline>
-      </svg>
-    ),
-  },
-  {
-    id: "step-3",
-    level: "Phase 03: Mastery (Current)",
-    title: "Bachelor of Computer Engineering",
-    institution: "Savitribai Phule Pune University, Pune",
-    date: "2024 - 2027",
-    highlight: "Computer Science & Eng.",
+    id: "higher-secondary",
+    level: "Higher Secondary Education",
+    title: "Science Stream (Physics, Chemistry & Mathematics)",
+    institution: "Higher Secondary — Science Stream",
+    date: "Completed",
+    highlight: "Analytical Thinking & Problem Solving",
     color: "from-[#d4af37] to-yellow-700",
     borderColor: "border-[#d4af37]/60",
     accent: "text-[#d4af37]",
-    topOffset: "top-[35vh]", // Stops lowest, capping the stack
+    topOffset: "top-[20vh]",
+    zIndex: "z-20",
+    icon: (
+      <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"></path>
+      </svg>
+    ),
+  },
+  {
+    id: "independent-learning",
+    level: "Independent Learning (Current)",
+    title: "Hands-on Development & AI Exploration",
+    institution: "Self-directed — Product Building",
+    date: "Ongoing",
+    highlight: "Practical AI, Backend & Product Development",
+    color: "from-blue-500 to-indigo-700",
+    borderColor: "border-blue-500/40",
+    accent: "text-blue-400",
+    topOffset: "top-[35vh]",
     zIndex: "z-30",
     icon: (
-      <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>
-        <path d="M6 12v5c3 3 9 3 12 0v-5"></path>
+      <svg viewBox="0 0 24 24" width="28" height="28" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2v6"></path>
+        <path d="M8 14s1-4 4-4 4 4 4 4"></path>
+        <path d="M4 22h16"></path>
       </svg>
     ),
   }

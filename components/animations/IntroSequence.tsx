@@ -52,7 +52,7 @@ export default function IntroSequence() {
           {/* Handwriting Container */}
           <div className="relative z-10 flex flex-col items-center justify-center text-center">
             
-            {/* 1st Line: Writing "Mayank Vispute" */}
+            {/* 1st Line: Writing "Suyash Vishwakarma" */}
             <motion.div
               initial={{ clipPath: "polygon(0 0, 0 0, 0 100%, 0% 100%)" }}
               animate={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)" }}
@@ -64,7 +64,7 @@ export default function IntroSequence() {
                 className={`${signatureFont.className} text-6xl md:text-8xl lg:text-[9rem] text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] font-bold py-2`}
                 style={{ lineHeight: '1.2' }}
               >
-                Mayank Vispute
+                Suyash Vishwakarma
               </h1>
             </motion.div>
 
@@ -77,7 +77,7 @@ export default function IntroSequence() {
               className="pl-4 pr-4 -mt-2 md:-mt-6"
             >
               <h2 
-                className={`${signatureFont.className} text-4xl md:text-6xl text-purple-400 drop-shadow-[0_0_15px_rgba(168,83,186,0.4)] py-2`}
+                className={`${signatureFont.className} text-4xl md:text-6xl text-red-400 drop-shadow-[0_0_15px_rgba(168,83,186,0.4)] py-2`}
               >
                 Portfolio
               </h2>

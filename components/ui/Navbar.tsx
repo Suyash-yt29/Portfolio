@@ -40,7 +40,7 @@ export default function Navbar() {
       >
         {/* Logo */}
         <a href="#" onClick={() => setIsMobileMenuOpen(false)} className="text-xl font-bold tracking-tighter text-white cursor-none z-50 relative">
-          M<span className="text-[#d4af37]">.</span>V
+          S<span className="text-[#d4af37]">.</span>V
         </a>
 
         {/* Desktop Links */}

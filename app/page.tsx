@@ -31,7 +31,7 @@ export default function Home() {
               /* FIX 1: Bumped opacity back up to 70! */
               className="absolute inset-0 h-full w-full object-cover opacity-70 transform-gpu"
             >
-              <source src="/about-bg.mp4" type="video/mp4" />
+              <source src="/second-background.mp4" type="video/mp4" />
             </video>
             
             {/* FIX 2: Lightened the middle overlay to via-black/30 so the video is clearly visible */}

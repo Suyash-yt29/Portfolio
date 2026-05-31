@@ -9,10 +9,9 @@ import { Caveat } from "next/font/google";
 const caveatFont = Caveat({ subsets: ["latin"], weight: ["700"] });
 
 const ROLES = [
-  "Freelancer",
-  "Full Stack Developer",
-  "AI Engineer",
-  "UI/UX Designer",
+  "AI-Focused Product Developer",
+  "Backend Builder",
+  "Building Real Digital Experiences",
 ];
 
 export default function Hero() {
@@ -53,7 +52,7 @@ export default function Hero() {
         // transform-gpu translate-z-0 protects the browser from animation lag
         className="absolute inset-0 z-0 h-full w-full object-cover opacity-80 transform-gpu translate-z-0"
       >
-        <source src="/hero-bg.mp4" type="video/mp4" />
+        <source src="/hero_bg.mp4" type="video/mp4" />
       </video>
 
       {/* Dark gradient overlay */}
@@ -85,8 +84,19 @@ export default function Hero() {
             className={`${caveatFont.className} pr-4 text-6xl md:text-7xl lg:text-[6.5rem] tracking-wide mb-6 text-transparent bg-clip-text bg-gradient-to-br from-white via-gray-300 to-gray-500 drop-shadow-[0_4px_10px_rgba(255,255,255,0.1)]`}
             style={{ lineHeight: '1.2' }}
           >
-            Mayank Vispute
+            Suyash Vishwakarma
           </motion.h1>
+          {/* Looping Roles Animation */}
+
+          {/* One-line bio (small) */}
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: ANIMATION_DELAY + 0.15 }}
+            className="max-w-2xl text-sm md:text-base text-gray-300 leading-relaxed mb-4"
+          >
+            I enjoy transforming ambitious ideas into interactive products that combine technology, usability, and human behavior.
+          </motion.p>
 
           {/* Looping Roles Animation */}
           <motion.div
@@ -112,6 +122,15 @@ export default function Hero() {
             )}
           </motion.div>
 
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: ANIMATION_DELAY + 0.7 }}
+            className="max-w-3xl text-base md:text-lg text-gray-300 leading-relaxed mb-8"
+          >
+            Building user-first products around AI, social interaction, and intelligent systems. Focused on creating experiences people naturally want to use—not just applications that function.
+          </motion.p>
+
           {/* Call to Action Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -125,18 +144,23 @@ export default function Hero() {
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
 
+            <a href="#contact" className="group relative flex items-center gap-2 rounded-full border border-white/20 bg-black/40 px-8 py-4 text-sm font-semibold text-white transition-all hover:border-[#d4af37]/50 hover:bg-[#d4af37]/10 hover:text-[#d4af37] active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.08)]">
+              Connect With Me
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </a>
+
             {/* Social Links */}
             <div className="flex gap-4">
-              <a href="https://github.com/mayankvispute7" target="_blank" rel="noreferrer" className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-black/40 backdrop-blur-md transition-all hover:border-[#d4af37]/50 hover:bg-[#d4af37]/10 hover:text-[#d4af37] text-gray-300">
+              <a href="https://github.com/Suyash29-source" target="_blank" rel="noreferrer" className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-black/40 backdrop-blur-md transition-all hover:border-[#d4af37]/50 hover:bg-[#d4af37]/10 hover:text-[#d4af37] text-gray-300">
                 <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.02c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 19 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A4.8 4.8 0 0 0 9 18v4"></path>
                 </svg>
               </a>
-              <a href="https://www.linkedin.com/in/mayank-vispute-a28641251/" target="_blank" rel="noreferrer" className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-black/40 backdrop-blur-md transition-all hover:border-[#d4af37]/50 hover:bg-[#d4af37]/10 hover:text-[#d4af37] text-gray-300">
+              <a href="https://instagram.com/illustrious.29" target="_blank" rel="noreferrer" className="flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-black/40 backdrop-blur-md transition-all hover:border-[#d4af37]/50 hover:bg-[#d4af37]/10 hover:text-[#d4af37] text-gray-300">
                 <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                  <rect x="2" y="9" width="4" height="12"></rect>
-                  <circle cx="4" cy="4" r="2"></circle>
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                 </svg>
               </a>
             </div>

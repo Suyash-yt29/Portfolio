@@ -9,29 +9,16 @@ const caveatFont = Caveat({ subsets: ["latin"], weight: ["400", "700"] });
 
 const experiences = [
   {
-    id: "widesoftech",
-    role: "Full Stack Developer Intern",
-    company: "Widesoftech Pvt. Ltd",
-    date: "Jan 2026 - Feb 2026",
-    location: "Pune, India",
+    id: "independent-product-developer",
+    role: "Independent Product Developer",
+    company: "Self-Directed Projects",
+    date: "2024 — Present",
+    location: "Kanpur, Uttar Pradesh, India",
     points: [
-      "Architected the full-stack infrastructure for InternMeets.com, ensuring a seamless, responsive experience.",
-      "Engineered complex search algorithms for efficient filtering by domain, location, and stipend.",
-      "Optimized website performance and SEO strategies, achieving faster load times.",
-      "Implemented secure authentication and database systems to manage student registrations."
-    ]
-  },
-  {
-    id: "vanshavaly",
-    role: "Web & AI Intern",
-    company: "Vanshavaly.com",
-    date: "July 2025 - Dec 2025",
-    location: "Pune, India",
-    points: [
-      "Engineered and deployed a live AI Chatbot to handle real-time user queries on the production website.",
-      "Automated 60% of support tasks by training NLP models on system data.",
-      "Managed live site operations using cPanel, ensuring SSL security and database integrity.",
-      "Optimized MySQL database queries, improving data retrieval speeds for both the chatbot and main site."
+      "Building and experimenting with self-initiated projects focused on AI, communication systems, and user-centric product experiences.",
+      "Current focus areas include real-time chat systems, AI-powered workflows, product architecture, backend logic, and user interaction systems.",
+      "Learning through hands-on development and practical implementation.",
+      "Shaping digital products that balance technology, usability, and meaningful social interaction."
     ]
   }
 ];
@@ -115,7 +102,7 @@ export default function Experience() {
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
               </svg>
-              root@mayank-os: ~/experience
+              root@suyash-os: ~/experience
             </div>
             <div className="w-12"></div>
           </div>
@@ -167,7 +154,7 @@ export default function Experience() {
                   
                   {/* Command Line Input Simulation */}
                   <motion.div variants={terminalLine} className="mb-4 flex flex-wrap items-center gap-2 text-[#2a8af6]">
-                    <span className="text-green-400 font-bold">mayank@admin</span>
+                    <span className="text-green-400 font-bold">suyash@admin</span>
                     <span className="text-white">:</span>
                     <span className="text-blue-400">~/experience</span>
                     <span className="text-white">$</span>
@@ -233,7 +220,7 @@ export default function Experience() {
 
                   {/* Blinking Cursor at the bottom */}
                   <motion.div variants={terminalLine} className="mt-6 flex items-center text-[#2a8af6]">
-                    <span className="text-green-400 font-bold">mayank@admin</span>
+                    <span className="text-green-400 font-bold">suyash@admin</span>
                     <span className="text-white">:</span>
                     <span className="text-blue-400">~/experience</span>
                     <span className="text-white">$</span>
